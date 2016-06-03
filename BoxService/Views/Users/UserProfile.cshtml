@@ -1,0 +1,63 @@
+﻿@model BoxService.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Profile</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            Dues:
+        </dt>
+
+        <dd>
+            $@Html.DisplayFor(model => model.Dues)
+        </dd>
+        <dt>
+            Your Box:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserBox)
+        </dd>
+
+        <dt>
+            Likes Sweet:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Likes)
+        </dd>
+
+        <dt>
+            Likes Savory:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dislikes)
+        </dd>
+    </dl>
+</div>
+@if (ViewBag.isAdmin == "Yes")
+{
+    <p>
+        @Html.ActionLink("Admin Profile", "Admin", "Users")
+    </p>
+}
