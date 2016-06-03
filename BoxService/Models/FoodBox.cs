@@ -9,7 +9,7 @@ namespace BoxService.Models
         public string Name { get; set; }
         public string Genre { get; set; }
         public decimal Price { get; set; }
-        public ICollection<ApplicationUser> Users { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
 
     }
 }

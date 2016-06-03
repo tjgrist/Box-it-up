@@ -16,7 +16,7 @@ namespace BoxService.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: FoodItems
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString = null)
         {
             var foods = from f in db.FoodBoxes
                         select f;

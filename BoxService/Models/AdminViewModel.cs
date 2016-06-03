@@ -15,7 +15,7 @@ namespace BoxService.Models
     {
         public FoodBox InvoiceBox { get; set; }
         public string UserName { get; set; }
-        public string Box { get; set; }
+        public string BoxName { get; set; }
     }
    
 }

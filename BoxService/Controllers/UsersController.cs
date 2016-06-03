@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -44,9 +45,6 @@ namespace BoxService.Controllers
             var currentUserID = User.Identity.GetUserId();
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(currentUserID);
-            FoodBox box = db.FoodBoxes.First(x => x.ID == currentUser.FoodBoxID);
-            currentUser.Dues = box.Price;
-            db.SaveChanges();
             return View(currentUser);
 
         }
@@ -55,7 +53,7 @@ namespace BoxService.Controllers
         {
             GroupedAdminViewModel adminViewModel = new GroupedAdminViewModel();
             var allUsers = db.Users.ToList();
-            adminViewModel.Users = allUsers.Select(u => new AdminViewModel { UserName = u.UserName, Box = u.UserBox, InvoiceBox = db.FoodBoxes.First(x => x.ID == u.FoodBoxID) }).ToList();
+            adminViewModel.Users = allUsers.Select(u => new AdminViewModel { UserName = u.UserName, BoxName = u.UserBox, InvoiceBox = db.FoodBoxes.First(x => x.ID == u.FoodBoxID) }).ToList();
             foreach (var u in adminViewModel.Users)
             {
                 adminViewModel.TotalSales += u.InvoiceBox.Price;
@@ -78,17 +76,23 @@ namespace BoxService.Controllers
             }
             return View();
         }
+
         [Authorize]
-        public ActionResult ChangeBox(int? id)
+        public ActionResult ChangeBox(RegisterViewModel model)
         {
             ViewBag.Boxes = new SelectList(db.FoodBoxes.Distinct().ToList(), "Name", "Name");
+            //user.FoodBoxID = db.FoodBoxes.Where(x => x.Name == )
+
+
             var currentUserID = User.Identity.GetUserId();
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var currentUser = manager.FindById(currentUserID);
-            var boxupdate = db.FoodBoxes.Where(x => x.ID == currentUser.FoodBoxID);
-            UpdateModel(currentUser);
-            db.SaveChanges();
-            db.SaveChanges();
+            //// var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = db.Users.Find(currentUserID);
+            // currentUser.UserBox = model.UserBox;
+            // FoodBox box = db.FoodBoxes.First(x => x.Name == currentUser.UserBox);
+            // currentUser.FoodBoxID = box.ID;
+            // //db.Entry(boxupdate).State = EntityState.Modified;
+            // db.SaveChanges();
+
             return View(currentUser);
         }
         public Boolean isAdminUser()

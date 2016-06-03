@@ -4,14 +4,11 @@
     ViewBag.Title = "ChangeBox";
 }
 
-<h2>ChangeBox</h2>
+<h2>Change your Box</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("ChangeBox", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        <h4>ApplicationUser</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -19,7 +16,7 @@
             @Html.Label("Choose a Box:", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.DropDownList("UserBox", (SelectList)ViewBag.Boxes, " ")
-                @Html.ValidationMessageFor(model => model.UserBox, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.FoodBoxID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -42,3 +39,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
