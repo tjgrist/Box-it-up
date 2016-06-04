@@ -1,10 +1,12 @@
 ﻿using BoxService.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -78,14 +80,12 @@ namespace BoxService.Controllers
         }
 
         [Authorize]
-        public ActionResult ChangeBox(RegisterViewModel model)
+        public ActionResult ChangeBox()
         {
             ViewBag.Boxes = new SelectList(db.FoodBoxes.Distinct().ToList(), "Name", "Name");
             //user.FoodBoxID = db.FoodBoxes.Where(x => x.Name == )
 
-
             var currentUserID = User.Identity.GetUserId();
-            //// var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = db.Users.Find(currentUserID);
             // currentUser.UserBox = model.UserBox;
             // FoodBox box = db.FoodBoxes.First(x => x.Name == currentUser.UserBox);
@@ -94,6 +94,24 @@ namespace BoxService.Controllers
             // db.SaveChanges();
 
             return View(currentUser);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> ChangeBox(ApplicationUser model)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            if (ModelState.IsValid)
+            {
+                var currentUserID = User.Identity.GetUserId();
+                var currentUser = db.Users.Find(currentUserID);
+                currentUser.UserBox = model.UserBox;
+                currentUser.FoodBoxID = db.FoodBoxes.Where(x => x.Name == model.UserBox).SingleOrDefault().ID;
+                FoodBox box = db.FoodBoxes.First(x => x.ID == currentUser.FoodBoxID);
+                currentUser.Dues = box.Price;
+                return RedirectToAction("UserProfile", "Users");
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
         public Boolean isAdminUser()
         {

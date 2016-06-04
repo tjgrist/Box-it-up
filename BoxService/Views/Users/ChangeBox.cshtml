@@ -16,7 +16,7 @@
             @Html.Label("Choose a Box:", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.DropDownList("UserBox", (SelectList)ViewBag.Boxes, " ")
-                @Html.ValidationMessageFor(model => model.FoodBoxID, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.UserBox, "", new { @class = "text-danger" })
             </div>
         </div>
 
