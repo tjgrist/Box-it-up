@@ -10,7 +10,9 @@
 {
     <div class="form-horizontal">
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true)
+            
+            @Html.HiddenFor(model => model.FoodBoxID)
 
         <div class="form-group">
             @Html.Label("Choose a Box:", new { @class = "col-md-2 control-label" })
@@ -27,6 +29,15 @@
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
+
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.PasswordHash)
+            @Html.HiddenFor(model => model.Likes)
+            @Html.HiddenFor(model => model.Dislikes)
+            @Html.HiddenFor(model => model.SecurityStamp)
+            @Html.HiddenFor(model => model.PhoneNumber)
+            @Html.HiddenFor(model => model.LockoutEnabled)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

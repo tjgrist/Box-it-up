@@ -85,7 +85,7 @@ namespace BoxService.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Genre,Price")] FoodBox foodItem)
+        public ActionResult Edit([Bind(Exclude = "ID")] FoodBox foodItem)
         {
             if (ModelState.IsValid)
             {

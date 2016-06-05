@@ -5,13 +5,10 @@
 
 @if (ViewBag.isAdmin == "Yes")
 {
-    <h2>Welcome <strong>@ViewBag.Name</strong> Admin.</h2>
-    <p>
-        @Html.ActionLink("Manage Roles", "Index", "Role")
-    </p>
-
-    <h3>Total Customers: @Model.Users.Count</h3>
-    <h3>Total Sales: $@Model.TotalSales</h3>
+    <h2>Welcome, <strong>@ViewBag.Name</strong>.</h2>
+    <h3>You're an administrator.</h3>
+    <h4>Total Customers: @Model.Users.Count</h4>
+    <h4>Total Sales: $@Model.TotalSales</h4>
     foreach (var user in Model.Users)
     {
         <div>
@@ -26,7 +23,12 @@
             </dl>
         </div>
     }
-    <p>@Html.ActionLink("View your Profile", "UserProfile", "Users")</p>
+    <p>
+        @Html.ActionLink("View your Profile", "UserProfile", "Users")
+    </p>    
+    <p>
+        @Html.ActionLink("Manage Roles", "Index", "Role")
+    </p>
 }
 else
 {

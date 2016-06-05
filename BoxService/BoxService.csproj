@@ -180,6 +180,10 @@
     <Compile Include="Migrations\201606031857196_InitialCreate.Designer.cs">
       <DependentUpon>201606031857196_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606052313167_added flavorprofile field to foodboxes.cs" />
+    <Compile Include="Migrations\201606052313167_added flavorprofile field to foodboxes.Designer.cs">
+      <DependentUpon>201606052313167_added flavorprofile field to foodboxes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -275,6 +279,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606031857196_InitialCreate.resx">
       <DependentUpon>201606031857196_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606052313167_added flavorprofile field to foodboxes.resx">
+      <DependentUpon>201606052313167_added flavorprofile field to foodboxes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

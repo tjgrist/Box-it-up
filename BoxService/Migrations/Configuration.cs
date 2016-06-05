@@ -9,7 +9,7 @@ namespace BoxService.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "BoxService.Models.ApplicationDbContext";
         }
 
