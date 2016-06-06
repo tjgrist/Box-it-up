@@ -7,6 +7,7 @@
 {
     <h2>Welcome, <strong>@ViewBag.Name</strong>.</h2>
     <h3>You're an administrator.</h3>
+    <p></p>
     <h4>Total Customers: @Model.Users.Count</h4>
     <h4>Total Sales: $@Model.TotalSales</h4>
     foreach (var user in Model.Users)
@@ -17,8 +18,12 @@
                 <dt>
                     <strong>@user.UserName :</strong>
                 </dt>
-                <dd> @user.BoxName </dd>
-                <dd> Dues: @user.InvoiceBox.Price </dd>
+                <dd> 
+                    @user.BoxName 
+                </dd>
+                <dd> 
+                    Dues: @user.InvoiceBox.Price
+                </dd>
                 <dt></dt>
             </dl>
         </div>
@@ -32,6 +37,6 @@
 }
 else
 {
-    <h2>  Hi <strong>@ViewBag.Name</strong></h2>
+    <h2>Hi, <strong>@ViewBag.Name</strong></h2>
     <h4>Sorry, You can't view this page. View your @Html.ActionLink("Profile", "UserProfile", "Users")</h4>
 }
