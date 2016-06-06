@@ -101,25 +101,36 @@ namespace BoxService.Controllers
             }
             return View(user);
         }
+        [Authorize]
+        [HttpGet]
         public ActionResult SuggestBox()
         {
             var currentUserID = User.Identity.GetUserId();
-            var currentUser = db.Users.Find(currentUserID);
-            return View(currentUser);
-        }
-        public ActionResult SuggestBox(ApplicationUser user)
-        {
-            if (user.Likes == "Yes")
+            var user = db.Users.Find(currentUserID);
+            if (user.Likes.ToLower().Replace(" ", "") == "yes")
             {
-                //ViewBag.Boxes = new SelectList(db.FoodBoxes.Where(x => x.).ToList() "Name", "Name");
+                ViewBag.SuggestedBoxes = new SelectList(db.FoodBoxes.Where(x => x.FlavorProfile >= 5).ToList(), "Name", "Name");
             }
             else
             {
-
+                ViewBag.SuggestedBoxes = new SelectList(db.FoodBoxes.Where(x => x.FlavorProfile <= 5).ToList(), "Name", "Name");
             }
             return View(user);
-
         }
+        [HttpPost]
+        public ActionResult SuggestBox(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                user.FoodBoxID = db.FoodBoxes.First(x => x.Name == user.UserBox).ID;
+                user.Dues = db.FoodBoxes.First(x => x.ID == user.FoodBoxID).Price;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("UserProfile", "Users");
+            }
+            return View(user);
+        }
+
         public Boolean isAdminUser()
         {
             if (User.Identity.IsAuthenticated)

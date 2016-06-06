@@ -56,6 +56,10 @@
     </dl>
 </div>
 <div>@Html.ActionLink("Change your box", "ChangeBox", "Users")</div>
+<div>
+    @Html.ActionLink("Box Suggestions", "SuggestBox", "Users")
+</div>
+
 @if (ViewBag.isAdmin == "Yes")
 {
     <p>

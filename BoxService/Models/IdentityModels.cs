@@ -38,6 +38,8 @@ namespace BoxService.Models
             return new ApplicationDbContext();
         }
 
+        //public System.Data.Entity.DbSet<BoxService.Models.ApplicationUser> ApplicationUsers { get; set; }
+
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; } //This is a duplicate for some reason VS added. 
     }
 }

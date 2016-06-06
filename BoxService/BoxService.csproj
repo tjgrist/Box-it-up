@@ -262,6 +262,7 @@
     <Content Include="Views\Users\UserProfile.cshtml" />
     <Content Include="Views\Users\Admin.cshtml" />
     <Content Include="Views\Users\ChangeBox.cshtml" />
+    <Content Include="Views\Users\SuggestBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminPages\" />
