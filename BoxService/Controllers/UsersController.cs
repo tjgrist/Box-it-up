@@ -83,7 +83,7 @@ namespace BoxService.Controllers
         [HttpGet]
         public ActionResult ChangeBox()
         {
-            ViewBag.Boxes = new SelectList(db.FoodBoxes.Distinct().ToList(), "Name", "Name");
+            ViewBag.Boxes = new SelectList(db.FoodBoxes.ToList(), "Name", "Name");
             var currentUserID = User.Identity.GetUserId();
             var currentUser = db.Users.Find(currentUserID);
             return View(currentUser);
